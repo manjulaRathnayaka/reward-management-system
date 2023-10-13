@@ -1,3 +1,4 @@
+import ballerina/mime;
 import ballerina/http;
 
 # A service representing a network-accessible API
@@ -38,11 +39,36 @@ service / on new http:Listener(9090) {
         ];
     }
 
-    resource function get generate\-qr(string text) returns string {
-        return "not implemented yet";
+    resource function get generate\-qr(string text) returns http:Response|error {
+
+        http:Client qrCodeGeneratorApi = check new (url = qrCodeGeneratorApiUrl, config = {
+            auth: {
+                tokenUrl: qrCodeGeneratorApiTokenUrl,
+                clientId: qrCodeGeneratorApiClientId,
+                clientSecret: qrCodeGeneratorApiClientSecret
+            }
+        });
+
+        http:Response|http:ClientError response = qrCodeGeneratorApi->/qrcode(content = text);
+        if response is http:Response  && response.statusCode == http:STATUS_OK {
+                byte[] binaryPayload = check response.getBinaryPayload();
+                http:Response newResponse = new;
+                newResponse.setBinaryPayload(binaryPayload, mime:IMAGE_PNG);
+                return newResponse;
+        } else {
+            return response;
+        }
+
     }
 
 }
+
+configurable string qrCodeGeneratorApiUrl = ?;
+configurable string qrCodeGeneratorApiTokenUrl = ?;
+configurable string qrCodeGeneratorApiClientId = ?;
+configurable string qrCodeGeneratorApiClientSecret = ?;
+
+
 
 type CardDetails record {
     string userId;
