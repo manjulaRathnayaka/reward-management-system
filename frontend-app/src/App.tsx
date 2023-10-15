@@ -15,9 +15,9 @@ function App() {
         <ThemeProvider theme={questTheme}>
           <Routes>
             <Route path="/" element={<Q2Portal />} />
-            <Route path="Q5QrCode" element={<Q5QrCode />} />
-            <Route path="Q3Rewards" element={<Q3Rewards />} />
-            <Route path="Q4RewardPage" element={<Q4RewardPage />} />
+            <Route path="/qr-code/:rewardId" element={<Q5QrCode />} />
+            <Route path="/rewards" element={<Q3Rewards />} />
+            <Route path="/reward-details/:rewardId" element={<Q4RewardPage />} />
           </Routes>
         </ThemeProvider>
       </StyledEngineProvider>

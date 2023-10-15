@@ -1,16 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "@asgardeo/auth-react";
 
+interface Config {
+  redirectUrl: string;
+  asgardeoClientId: string;
+  asgardeoBaseUrl: string;
+  apiUrl: string;
+}
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+declare global {
+  interface Window {
+    config: Config;
+  }
+}
+
+const authConfig = {
+  signInRedirectURL: window.config.redirectUrl,
+  signOutRedirectURL: window.config.redirectUrl,
+  clientID: window.config.asgardeoClientId,
+  baseUrl: window.config.asgardeoBaseUrl,
+  scope: ["openid", "profile", "email"],
+  resourceServerURLs: [window.config.apiUrl],
+  endpoints: {
+    authorizationEndpoint: `${window.config.asgardeoBaseUrl}/oauth2/authorize`,
+    tokenEndpoint: `${window.config.asgardeoBaseUrl}/oauth2/token`,
+    endSessionEndpoint: `${window.config.asgardeoBaseUrl}/oidc/logout`,
+  },
+};
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthProvider config={authConfig}>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

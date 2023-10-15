@@ -11,20 +11,83 @@
  *
  **********************************************************************/
 
-import React from 'react';
-import useQ2PortalResponsiveSize from './useQ2PortalResponsiveSize';
+import React, { useEffect, useState } from "react";
+import useQ2PortalResponsiveSize from "./useQ2PortalResponsiveSize";
+import { useAuthContext } from "@asgardeo/auth-react";
+import { CardDetails } from "src/api/types";
+import { getCardDetails } from "src/api/api";
+import { useNavigate } from "react-router-dom";
 
 /* These are the possible values for the current variant. Use this to change the currentVariant dynamically.
 Please don't modify */
 const variantOptions = {
-  ScreenDesktop: 'ScreenDesktop',
-  ScreenMobile: 'ScreenMobile',
+  ScreenDesktop: "ScreenDesktop",
+  ScreenMobile: "ScreenMobile",
 };
 
 const useQ2Portal = () => {
+  const navigate = useNavigate();
   const [currentVariant, setCurrentVariant] = React.useState<string>(
-    variantOptions['ScreenDesktop']
+    variantOptions["ScreenDesktop"]
   );
+  const { signIn, isAuthenticated, state } = useAuthContext();
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
+  const [isCardDetailsLoading, setIsCardDetailsLoading] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+  const [cardDetails, setCardDetails] = useState<CardDetails | null>(null);
+
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  const checkAuthState = async (): Promise<boolean> => {
+    setIsAuthLoading(true);
+    await sleep(2000);
+    const isSignedIn = await isAuthenticated();
+    setSignedIn(isSignedIn);
+    setIsAuthLoading(false);
+    return isSignedIn;
+  };
+
+  console.log(state);
+
+  useEffect(() => {
+    if(!state.isAuthenticated){
+      checkAuthState().then((isSignedIn) => {
+        if (!isSignedIn) {
+          signIn()
+            .then(() => {
+              setSignedIn(true);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
+      });
+    }
+  }, [state]);
+
+  useEffect(() => {
+    if (signedIn && state.sub) {
+      getCardInfo(state.sub);
+    }
+  }, [signedIn, state.sub]);
+
+  async function getCardInfo(userId) {
+    setIsCardDetailsLoading(true);
+    getCardDetails(userId)
+      .then((res) => {
+        setCardDetails(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        setIsCardDetailsLoading(false);
+      });
+  }
+
+  const onRedeemPoints = () => {
+    navigate("/rewards");
+  };
 
   const breakpointsVariant = useQ2PortalResponsiveSize();
 
@@ -34,9 +97,15 @@ const useQ2Portal = () => {
     }
   }, [breakpointsVariant]);
 
-  const data: any = { currentVariant };
+  const data: any = {
+    currentVariant,
+    signedIn,
+    isAuthLoading,
+    isCardDetailsLoading,
+    cardDetails,
+  };
 
-  const fns: any = { setCurrentVariant };
+  const fns: any = { setCurrentVariant, onRedeemPoints };
 
   return { data, fns };
 };

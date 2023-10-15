@@ -13,6 +13,7 @@
 
 import React from 'react';
 import useBannerTopResponsiveSize from './useBannerTopResponsiveSize';
+import { useAuthContext } from '@asgardeo/auth-react';
 
 /* These are the possible values for the current variant. Use this to change the currentVariant dynamically.
 Please don't modify */
@@ -26,12 +27,7 @@ const useBannerTop = () => {
     variantOptions['Property1Desktop']
   );
 
-  React.useEffect(() => {
-    if (breakpointsVariant !== currentVariant) {
-      setCurrentVariant(breakpointsVariant);
-      console.log('asaas');
-    }
-  }, [breakpointsVariant]);
+  const { signOut, state } = useAuthContext();
 
   const breakpointsVariant = useBannerTopResponsiveSize();
 
@@ -41,9 +37,21 @@ const useBannerTop = () => {
     }
   }, [breakpointsVariant]);
 
-  const data: any = { currentVariant, currentVariant };
+  
 
-  const fns: any = { setCurrentVariant, setCurrentVariant };
+  React.useEffect(() => {
+    if (breakpointsVariant !== currentVariant) {
+      setCurrentVariant(breakpointsVariant);
+    }
+  }, [breakpointsVariant]);
+
+  const handleSignOut = () => {
+    signOut();
+  }
+
+  const data: any = { currentVariant, state };
+
+  const fns: any = { setCurrentVariant, handleSignOut };
 
   return { data, fns };
 };

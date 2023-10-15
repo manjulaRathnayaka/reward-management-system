@@ -12,14 +12,14 @@
  *
  **********************************************************************/
 
-import React from 'react';
-import { Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { CardRewardProps } from 'src/types';
-import useCardReward from 'src/components/CardReward/useCardReward';
+import React from "react";
+import { Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { CardRewardProps } from "src/types";
+import useCardReward from "src/components/CardReward/useCardReward";
 
-const CardReward1: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardReward1: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -27,16 +27,16 @@ const CardReward1: any = styled('div')(({ theme }: any) => ({
   position: `relative`,
   isolation: `isolate`,
   flexDirection: `column`,
-  width: '100%',
+  width: "100%",
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `0px 0px 4px 0px`,
   overflow: `hidden`,
-  height: 'auto',
+  height: "auto",
 }));
 
-const Img: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['props'].includes(prop.toString()),
+const Img: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["props"].includes(prop.toString()),
 })(({ props }: any) => ({
   backgroundPosition: `center`,
   backgroundSize: `cover`,
@@ -46,7 +46,7 @@ const Img: any = styled('div', {
   position: `relative`,
   isolation: `isolate`,
   flexDirection: `row`,
-  justifyContent: `flex-start`,
+  justifyContent: `center`,
   alignItems: `flex-start`,
   alignSelf: `stretch`,
   height: `148px`,
@@ -55,7 +55,7 @@ const Img: any = styled('div', {
   backgroundImage: props.reward.imageSrc,
 }));
 
-const Content: any = styled('div')({
+const Content: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -69,7 +69,7 @@ const Content: any = styled('div')({
   margin: `0px`,
 });
 
-const Details: any = styled('div')({
+const Details: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -83,7 +83,7 @@ const Details: any = styled('div')({
   margin: `0px`,
 });
 
-const Top: any = styled('div')({
+const Top: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -97,7 +97,7 @@ const Top: any = styled('div')({
   margin: `0px`,
 });
 
-const Text: any = styled('div')({
+const Text: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -111,7 +111,7 @@ const Text: any = styled('div')({
   margin: `0px`,
 });
 
-const TitleTop: any = styled('div')({
+const TitleTop: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -125,24 +125,24 @@ const TitleTop: any = styled('div')({
   margin: `0px`,
 });
 
-const Title: any = styled('div')(({ theme }: any) => ({
+const Title: any = styled("div")(({ theme }: any) => ({
   textAlign: `center`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H6'].fontStyle,
-  fontFamily: theme.typography['Typography']['H6'].fontFamily,
-  fontWeight: theme.typography['Typography']['H6'].fontWeight,
-  fontSize: theme.typography['Typography']['H6'].fontSize,
-  letterSpacing: theme.typography['Typography']['H6'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H6'].lineHeight,
-  textDecoration: theme.typography['Typography']['H6'].textDecoration,
-  textTransform: theme.typography['Typography']['H6'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H6"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H6"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H6"].fontWeight,
+  fontSize: theme.typography["Typography"]["H6"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H6"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H6"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H6"].textDecoration,
+  textTransform: theme.typography["Typography"]["H6"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame5: any = styled('div')({
+const Frame5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -156,24 +156,24 @@ const Frame5: any = styled('div')({
   margin: `6px 0px 0px 0px`,
 });
 
-const Details1: any = styled('div')(({ theme }: any) => ({
+const Details1: any = styled("div")(({ theme }: any) => ({
   textAlign: `center`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame4: any = styled('div')({
+const Frame4: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -189,47 +189,49 @@ const Frame4: any = styled('div')({
 
 const ButtonText: any = styled(Button)(({ theme }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
 function CardReward(props: CardRewardProps): JSX.Element {
-  const { fns } = useCardReward(props);
+  const { data, fns } = useCardReward(props);
 
   return (
     <CardReward1 className={props.className}>
-      <Img props={props}></Img>
+      <Img props={props}>
+        <img src={data.imageUrl} alt={`${props.reward.name} logo`} />
+      </Img>
       <Content>
         <Details>
           <Top>
             <Text>
               <TitleTop>
-                <Title>{props.reward.title}</Title>
+                <Title>{props.reward.name}</Title>
               </TitleTop>
               <Frame5>
-                <Details1>{props.reward.value}</Details1>
+                <Details1>{`${props.reward.totalPoints}pts / $${props.reward.value}`}</Details1>
               </Frame5>
             </Text>
           </Top>
           <Frame4>
             <ButtonText
               variant="text"
-              size={'large'}
-              color={'primary'}
+              size={"large"}
+              color={"primary"}
               disabled={false}
-              onClick={() => fns.rewardDetailsPage(props.reward)}
+              onClick={() => fns.rewardDetailsPage(props.reward.id)}
             >
-              {'REDEEM'}
+              {"REDEEM"}
             </ButtonText>
           </Frame4>
         </Details>

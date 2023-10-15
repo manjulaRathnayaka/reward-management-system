@@ -11,20 +11,27 @@
  *
  **********************************************************************/
 
-import React from 'react';
-import useQ3RewardsResponsiveSize from './useQ3RewardsResponsiveSize';
+import React, { useEffect } from "react";
+import useQ3RewardsResponsiveSize from "./useQ3RewardsResponsiveSize";
+import { Reward } from "src/api/types";
+import { useAuthContext } from "@asgardeo/auth-react";
+import { getRewards } from "src/api/api";
 
 /* These are the possible values for the current variant. Use this to change the currentVariant dynamically.
 Please don't modify */
 const variantOptions = {
-  ScreenDesktop: 'ScreenDesktop',
-  ScreenMobile: 'ScreenMobile',
+  ScreenDesktop: "ScreenDesktop",
+  ScreenMobile: "ScreenMobile",
 };
 
 const useQ3Rewards = () => {
   const [currentVariant, setCurrentVariant] = React.useState<string>(
-    variantOptions['ScreenDesktop']
+    variantOptions["ScreenDesktop"]
   );
+  const [isRewardsLoading, setIsRewardsLoading] = React.useState(false);
+  const [rewards, setRewards] = React.useState<Reward[]>([]);
+
+  const { isAuthenticated } = useAuthContext();
 
   const breakpointsVariant = useQ3RewardsResponsiveSize();
 
@@ -32,9 +39,30 @@ const useQ3Rewards = () => {
     if (breakpointsVariant !== currentVariant) {
       setCurrentVariant(breakpointsVariant);
     }
-  }, [breakpointsVariant]);
+  }, [breakpointsVariant, currentVariant]);
 
-  const data: any = { currentVariant };
+  async function getRewardDeatils() {
+    const isSignedIn = await isAuthenticated();
+    if (isSignedIn) {
+      setIsRewardsLoading(true);
+      getRewards()
+        .then((res) => {
+          setRewards(res.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => {
+          setIsRewardsLoading(false);
+        });
+    }
+  }
+
+  useEffect(() => {
+    getRewardDeatils();
+  }, []);
+
+  const data: any = { currentVariant, rewards, isRewardsLoading };
 
   const fns: any = { setCurrentVariant };
 

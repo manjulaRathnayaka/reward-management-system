@@ -12,31 +12,31 @@
  *
  **********************************************************************/
 
-import React from 'react';
-import { Button } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
-import { styled } from '@mui/material/styles';
-import BrandImgImageImage from 'src/assets/images/5QRCode_brand_img.png';
-import BannerTop from 'src/components/BannerTop/BannerTop';
-import QrCode from 'src/components/QrCode/QrCode';
-import Footer1 from 'src/components/Footer1/Footer1';
-import { Q5QrCodeProps } from 'src/types';
-import useQ5QrCode from 'src/components/Q5QrCode/useQ5QrCode';
+import React from "react";
+import { Button, Skeleton } from "@mui/material";
+import { Helmet } from "react-helmet-async";
+import { styled } from "@mui/material/styles";
+import BrandImgImageImage from "src/assets/images/5QRCode_brand_img.png";
+import BannerTop from "src/components/BannerTop/BannerTop";
+import QrCode from "src/components/QrCode/QrCode";
+import Footer1 from "src/components/Footer1/Footer1";
+import { Q5QrCodeProps } from "src/types";
+import useQ5QrCode from "src/components/Q5QrCode/useQ5QrCode";
 
-const ScreenDesktop: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Other']['Divider'],
+const ScreenDesktop: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Other"]["Divider"],
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
   flexDirection: `column`,
-  width: '100%',
+  width: "100%",
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
   overflow: `hidden`,
-  height: 'auto',
+  height: "auto",
 }));
 
 const BannerTop1: any = styled(BannerTop)(({ theme }: any) => ({
@@ -44,18 +44,18 @@ const BannerTop1: any = styled(BannerTop)(({ theme }: any) => ({
   margin: `0px`,
 }));
 
-const QrCode1: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const QrCode1: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `10px 20px 100px 20px`
       : `10px 70px 100px 70px`,
   boxSizing: `border-box`,
@@ -64,53 +64,72 @@ const QrCode1: any = styled('div', {
   overflow: `hidden`,
 }));
 
-const CardContainer: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const CardContainer: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
-  padding: data.currentVariant === 'ScreenMobile' ? `40px 0px` : `60px 20px`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  padding: data.currentVariant === "ScreenMobile" ? `40px 0px` : `60px 20px`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin: `0px`,
   overflow: `hidden`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const Content: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Content: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `0px 20px 0px 30px`,
   boxSizing: `border-box`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin: `0px`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const QrCode2: any = styled(QrCode, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const QrCode2: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
-  width: data.currentVariant === 'ScreenMobile' ? `280px` : `330px`,
-  height: data.currentVariant === 'ScreenMobile' ? `280px` : `330px`,
+  width: data.currentVariant === "ScreenMobile" ? `280px` : `330px`,
+  height: data.currentVariant === "ScreenMobile" ? `280px` : `330px`,
   margin: `0px`,
 }));
 
-const Details: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const SizeBig: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["props"].includes(prop.toString()),
+})(({ props }: any) => ({
+  backgroundPosition: `center`,
+  backgroundSize: `cover`,
+  backgroundRepeat: `no-repeat`,
+  borderRadius: `0px`,
+  display: `flex`,
+  position: `relative`,
+  isolation: `isolate`,
+  flexDirection: `row`,
+  width: "100%",
+  height: `330px`,
+  justifyContent: `flex-start`,
+  alignItems: `flex-start`,
+  overflow: `hidden`,
+  // backgroundImage: props.imageSrc,
+}));
+
+const Details: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -121,15 +140,15 @@ const Details: any = styled('div', {
   alignItems: `center`,
   padding: `0px`,
   boxSizing: `border-box`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `20px 0px 0px 0px`
       : `0px 0px 0px 54px`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const Text: any = styled('div')({
+const Text: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -144,7 +163,7 @@ const Text: any = styled('div')({
   margin: `0px`,
 });
 
-const TitleTop: any = styled('div')({
+const TitleTop: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -158,7 +177,7 @@ const TitleTop: any = styled('div')({
   margin: `0px`,
 });
 
-const BrandImg: any = styled('div')({
+const BrandImg: any = styled("div")({
   backgroundPosition: `center`,
   backgroundSize: `cover`,
   backgroundRepeat: `no-repeat`,
@@ -169,31 +188,29 @@ const BrandImg: any = styled('div')({
   flexDirection: `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
-  height: `100px`,
-  width: `183px`,
   margin: `0px`,
   overflow: `hidden`,
-  backgroundImage: 'data,reward.imageSrc',
+  backgroundImage: "data,reward.imageSrc",
 });
 
-const Title: any = styled('div')(({ theme }: any) => ({
+const Title: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   alignSelf: `stretch`,
   margin: `10px 0px 0px 0px`,
 }));
 
-const Details1: any = styled('div')({
+const Details1: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -207,7 +224,7 @@ const Details1: any = styled('div')({
   margin: `16px 0px 0px 0px`,
 });
 
-const Value: any = styled('div')({
+const Value: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -221,57 +238,57 @@ const Value: any = styled('div')({
   margin: `0px`,
 });
 
-const Points: any = styled('div')(({ theme }: any) => ({
+const Points: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H3'].fontStyle,
-  fontFamily: theme.typography['Typography']['H3'].fontFamily,
-  fontWeight: theme.typography['Typography']['H3'].fontWeight,
-  fontSize: theme.typography['Typography']['H3'].fontSize,
-  letterSpacing: theme.typography['Typography']['H3'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H3'].lineHeight,
-  textDecoration: theme.typography['Typography']['H3'].textDecoration,
-  textTransform: theme.typography['Typography']['H3'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H3"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H3"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H3"].fontWeight,
+  fontSize: theme.typography["Typography"]["H3"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H3"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H3"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H3"].textDecoration,
+  textTransform: theme.typography["Typography"]["H3"].textTransform,
   margin: `0px`,
 }));
 
-const Points1: any = styled('div')(({ theme }: any) => ({
+const Points1: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H3'].fontStyle,
-  fontFamily: theme.typography['Typography']['H3'].fontFamily,
-  fontWeight: theme.typography['Typography']['H3'].fontWeight,
-  fontSize: theme.typography['Typography']['H3'].fontSize,
-  letterSpacing: theme.typography['Typography']['H3'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H3'].lineHeight,
-  textDecoration: theme.typography['Typography']['H3'].textDecoration,
-  textTransform: theme.typography['Typography']['H3'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H3"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H3"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H3"].fontWeight,
+  fontSize: theme.typography["Typography"]["H3"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H3"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H3"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H3"].textDecoration,
+  textTransform: theme.typography["Typography"]["H3"].textTransform,
   margin: `0px 0px 0px 10px`,
 }));
 
-const Details2: any = styled('div')(({ theme }: any) => ({
+const Details2: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `19px 0px 0px 0px`,
 }));
 
-const BottomButton: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const BottomButton: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -279,7 +296,7 @@ const BottomButton: any = styled('div', {
   isolation: `isolate`,
   flexDirection: `column`,
   justifyContent: `flex-start`,
-  alignItems: data.currentVariant === 'ScreenMobile' ? `center` : `flex-end`,
+  alignItems: data.currentVariant === "ScreenMobile" ? `center` : `flex-end`,
   padding: `0px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
@@ -287,21 +304,21 @@ const BottomButton: any = styled('div', {
 }));
 
 const ButtonText: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
 const Footer11: any = styled(Footer1)(({ theme }: any) => ({
@@ -319,40 +336,56 @@ function Q5QrCode(props: Q5QrCodeProps): JSX.Element {
       </Helmet>
       <BannerTop1 />
       <QrCode1 data={data}>
-        <CardContainer data={data}>
-          <Content data={data}>
-            <QrCode2 data={data} imageSrc={data.reward.qrcode} />
-            <Details data={data}>
-              <Text>
-                <TitleTop>
-                  <BrandImg></BrandImg>
-                  <Title>{data.reward.title}</Title>
-                </TitleTop>
-                <Details1>
-                  <Value>
-                    <Points>{`Value:`}</Points>
-                    <Points1>{data.reward.points}</Points1>
-                  </Value>
-                  <Details2>
-                    {`Use this QR Code at any Target store by scanning at checkout.`}
-                  </Details2>
-                  <BottomButton data={data}>
-                    <ButtonText
-                      variant="text"
-                      size={'large'}
-                      color={'primary'}
-                      disabled={false}
-                      onClick={fns.backToRewards}
-                      data={data}
-                    >
-                      {'BACK TO REWARDS'}
-                    </ButtonText>
-                  </BottomButton>
-                </Details1>
-              </Text>
-            </Details>
-          </Content>
-        </CardContainer>
+        {data.isRewardLoading || data.isQRLoading ? (
+          <Skeleton
+            variant="rounded"
+            sx={{ width: "1588px", height: "477px" }}
+          />
+        ) : (
+          <CardContainer data={data}>
+            <Content data={data}>
+              <QrCode2 data={data}>
+                <SizeBig className={props.className} props={props}>
+                  <img src={data.qrCode} alt="qrCode" />
+                </SizeBig>
+              </QrCode2>
+              <Details data={data}>
+                <Text>
+                  <TitleTop>
+                    <BrandImg>
+                      <img
+                        src={data.reward?.logoUrl}
+                        alt={`${data.reward?.name} logo`}
+                      />
+                    </BrandImg>
+                    <Title>{data.reward?.name}</Title>
+                  </TitleTop>
+                  <Details1>
+                    <Value>
+                      <Points>{`Value:`}</Points>
+                      <Points1>{`$${data.reward?.value}`}</Points1>
+                    </Value>
+                    <Details2>
+                      {`Use this QR Code at any Target store by scanning at checkout.`}
+                    </Details2>
+                    <BottomButton data={data}>
+                      <ButtonText
+                        variant="text"
+                        size={"large"}
+                        color={"primary"}
+                        disabled={false}
+                        onClick={fns.backToRewards}
+                        data={data}
+                      >
+                        {"BACK TO REWARDS"}
+                      </ButtonText>
+                    </BottomButton>
+                  </Details1>
+                </Text>
+              </Details>
+            </Content>
+          </CardContainer>
+        )}
       </QrCode1>
       <Footer11 />
     </ScreenDesktop>

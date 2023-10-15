@@ -12,38 +12,44 @@
  *
  **********************************************************************/
 
-import React from 'react';
-import { Button, Link as MUILink } from '@mui/material';
-import Card1Image from 'src/assets/images/2Portal_Card_1.png';
-import VectorImage from 'src/assets/images/2Portal_Vector.png';
-import Vector1Image from 'src/assets/images/2Portal_Vector_1.png';
-import Vector2Image from 'src/assets/images/2Portal_Vector_2.png';
-import Vector3Image from 'src/assets/images/2Portal_Vector_3.png';
-import Vector4Image from 'src/assets/images/2Portal_Vector_4.png';
-import Vector5Image from 'src/assets/images/2Portal_Vector_5.png';
-import Vector6Image from 'src/assets/images/2Portal_Vector_6.png';
-import Vector7Image from 'src/assets/images/2Portal_Vector_7.png';
-import Vector8Image from 'src/assets/images/2Portal_Vector_8.png';
-import { styled } from '@mui/material/styles';
-import BannerTop from 'src/components/BannerTop/BannerTop';
-import Footer1 from 'src/components/Footer1/Footer1';
-import { Q2PortalProps } from 'src/types';
-import useQ2Portal from 'src/components/Q2Portal/useQ2Portal';
+import React from "react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Link as MUILink,
+  Skeleton,
+} from "@mui/material";
+import Card1Image from "src/assets/images/2Portal_Card_1.png";
+import VectorImage from "src/assets/images/2Portal_Vector.png";
+import Vector1Image from "src/assets/images/2Portal_Vector_1.png";
+import Vector2Image from "src/assets/images/2Portal_Vector_2.png";
+import Vector3Image from "src/assets/images/2Portal_Vector_3.png";
+import Vector4Image from "src/assets/images/2Portal_Vector_4.png";
+import Vector5Image from "src/assets/images/2Portal_Vector_5.png";
+import Vector6Image from "src/assets/images/2Portal_Vector_6.png";
+import Vector7Image from "src/assets/images/2Portal_Vector_7.png";
+import Vector8Image from "src/assets/images/2Portal_Vector_8.png";
+import { styled } from "@mui/material/styles";
+import BannerTop from "src/components/BannerTop/BannerTop";
+import Footer1 from "src/components/Footer1/Footer1";
+import { Q2PortalProps } from "src/types";
+import useQ2Portal from "src/components/Q2Portal/useQ2Portal";
 
-const ScreenDesktop: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Other']['Divider'],
+const ScreenDesktop: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Other"]["Divider"],
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
   flexDirection: `column`,
-  width: '100%',
+  width: "100%",
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
   overflow: `hidden`,
-  height: 'auto',
+  height: "auto",
 }));
 
 const BannerTop1: any = styled(BannerTop)(({ theme }: any) => ({
@@ -51,8 +57,8 @@ const BannerTop1: any = styled(BannerTop)(({ theme }: any) => ({
   margin: `0px`,
 }));
 
-const Banner: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Banner: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -61,15 +67,15 @@ const Banner: any = styled('div', {
   flexDirection: `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
-  padding: data.currentVariant === 'ScreenMobile' ? `10px` : `10px 70px`,
+  padding: data.currentVariant === "ScreenMobile" ? `10px` : `10px 70px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
   margin: `11px 0px 0px 0px`,
   overflow: `hidden`,
 }));
 
-const CardChoreo: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -85,53 +91,53 @@ const CardChoreo: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Content: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent:
-    data.currentVariant === 'ScreenMobile' ? `center` : `flex-start`,
-  alignItems: data.currentVariant === 'ScreenMobile' ? `flex-start` : `center`,
+    data.currentVariant === "ScreenMobile" ? `center` : `flex-start`,
+  alignItems: data.currentVariant === "ScreenMobile" ? `flex-start` : `center`,
   padding: `20px 20px 20px 30px`,
   boxSizing: `border-box`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? 'unset' : `stretch`,
+  alignSelf: data.currentVariant === "ScreenMobile" ? "unset" : `stretch`,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Card1: any = styled('img')({
+const Card1: any = styled("img")({
   height: `109.82px`,
   width: `188px`,
   margin: `0px`,
 });
 
-const Details: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Details: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent:
-    data.currentVariant === 'ScreenMobile' ? `flex-start` : `space-between`,
-  alignItems: data.currentVariant === 'ScreenMobile' ? `flex-end` : `center`,
+    data.currentVariant === "ScreenMobile" ? `flex-start` : `space-between`,
+  alignItems: data.currentVariant === "ScreenMobile" ? `flex-end` : `center`,
   padding: `0px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `34px 0px 0px 0px`
       : `0px 0px 0px 34px`,
 }));
 
-const Top: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Top: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -142,12 +148,12 @@ const Top: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin: `0px`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const Text: any = styled('div')({
+const Text: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -161,7 +167,7 @@ const Text: any = styled('div')({
   margin: `0px`,
 });
 
-const TitleTop: any = styled('div')({
+const TitleTop: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -175,24 +181,24 @@ const TitleTop: any = styled('div')({
   margin: `0px`,
 });
 
-const Title: any = styled('div')(({ theme }: any) => ({
+const Title: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Points: any = styled('div')({
+const Points: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -206,7 +212,7 @@ const Points: any = styled('div')({
   margin: `19px 0px 0px 0px`,
 });
 
-const AvailablePoints: any = styled('div')({
+const AvailablePoints: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -219,42 +225,42 @@ const AvailablePoints: any = styled('div')({
   margin: `0px`,
 });
 
-const Details1: any = styled('div')(({ theme }: any) => ({
+const Details1: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H4'].fontStyle,
-  fontFamily: theme.typography['Typography']['H4'].fontFamily,
-  fontWeight: theme.typography['Typography']['H4'].fontWeight,
-  fontSize: theme.typography['Typography']['H4'].fontSize,
-  letterSpacing: theme.typography['Typography']['H4'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H4'].lineHeight,
-  textDecoration: theme.typography['Typography']['H4'].textDecoration,
-  textTransform: theme.typography['Typography']['H4'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H4"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H4"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H4"].fontWeight,
+  fontSize: theme.typography["Typography"]["H4"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H4"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H4"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H4"].textDecoration,
+  textTransform: theme.typography["Typography"]["H4"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Details2: any = styled('div')(({ theme }: any) => ({
+const Details2: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `4px 0px 0px 0px`,
 }));
 
-const Frame4: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Frame4: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -265,29 +271,29 @@ const Frame4: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  margin: data.currentVariant === 'ScreenMobile' ? `28px 0px 0px 0px` : `0px`,
+  margin: data.currentVariant === "ScreenMobile" ? `28px 0px 0px 0px` : `0px`,
 }));
 
 const ButtonText: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const Banner1: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Banner1: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -296,15 +302,15 @@ const Banner1: any = styled('div', {
   flexDirection: `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
-  padding: data.currentVariant === 'ScreenMobile' ? `10px` : `10px 70px`,
+  padding: data.currentVariant === "ScreenMobile" ? `10px` : `10px 70px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
   margin: `11px 0px 0px 0px`,
   overflow: `hidden`,
 }));
 
-const CardChoreo1: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo1: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -320,7 +326,7 @@ const CardChoreo1: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content1: any = styled('div')({
+const Content1: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -334,7 +340,7 @@ const Content1: any = styled('div')({
   margin: `0px`,
 });
 
-const Details3: any = styled('div')({
+const Details3: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -348,15 +354,15 @@ const Details3: any = styled('div')({
   margin: `0px`,
 });
 
-const BalanaceBanner: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const BalanaceBanner: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
-  backgroundColor: theme.palette['Other']['Divider'],
+  backgroundColor: theme.palette["Other"]["Divider"],
   borderRadius: `14px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `10px 12px`,
@@ -366,14 +372,14 @@ const BalanaceBanner: any = styled('div', {
   overflow: `hidden`,
 }));
 
-const Vector: any = styled('img')({
+const Vector: any = styled("img")({
   height: `40px`,
   width: `40px`,
   margin: `0px`,
 });
 
-const Txt: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Txt: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -385,73 +391,73 @@ const Txt: any = styled('div', {
   padding: `0px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
-  width: data.currentVariant === 'ScreenMobile' ? 'unset' : `832px`,
+  width: data.currentVariant === "ScreenMobile" ? "unset" : `832px`,
   margin:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `16px 0px 0px 0px`
       : `0px 0px 0px 16px`,
 }));
 
-const Details4: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Details4: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin: `0px`,
 }));
 
-const Details5: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Details5: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Secondary'],
-  fontStyle: theme.typography['Typography']['Body 3'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 3'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 3'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 3'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 3'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 3'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 3'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 3'].textTransform,
+  color: theme.palette["Text"]["Secondary"],
+  fontStyle: theme.typography["Typography"]["Body 3"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 3"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 3"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 3"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 3"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 3"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 3"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 3"].textTransform,
   alignSelf: `stretch`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin: `6px 0px 0px 0px`,
 }));
 
-const Top1: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Top1: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
   isolation: `isolate`,
-  flexDirection: data.currentVariant === 'ScreenMobile' ? `column` : `row`,
+  flexDirection: data.currentVariant === "ScreenMobile" ? `column` : `row`,
   justifyContent:
-    data.currentVariant === 'ScreenMobile' ? `flex-end` : `flex-start`,
+    data.currentVariant === "ScreenMobile" ? `flex-end` : `flex-start`,
   alignItems:
-    data.currentVariant === 'ScreenMobile' ? `flex-start` : `flex-end`,
+    data.currentVariant === "ScreenMobile" ? `flex-start` : `flex-end`,
   padding: `0px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
   margin: `28px 0px 0px 0px`,
 }));
 
-const Text1: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Text1: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -462,12 +468,12 @@ const Text1: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin: `0px`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const Card: any = styled('div')({
+const Card: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -481,24 +487,24 @@ const Card: any = styled('div')({
   margin: `0px`,
 });
 
-const CardNumber: any = styled('div')(({ theme }: any) => ({
+const CardNumber: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H6'].fontStyle,
-  fontFamily: theme.typography['Typography']['H6'].fontFamily,
-  fontWeight: theme.typography['Typography']['H6'].fontWeight,
-  fontSize: theme.typography['Typography']['H6'].fontSize,
-  letterSpacing: theme.typography['Typography']['H6'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H6'].lineHeight,
-  textDecoration: theme.typography['Typography']['H6'].textDecoration,
-  textTransform: theme.typography['Typography']['H6'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H6"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H6"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H6"].fontWeight,
+  fontSize: theme.typography["Typography"]["H6"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H6"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H6"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H6"].textDecoration,
+  textTransform: theme.typography["Typography"]["H6"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Balance: any = styled('div')({
+const Balance: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -512,7 +518,7 @@ const Balance: any = styled('div')({
   margin: `19px 0px 0px 0px`,
 });
 
-const BalanceDetails: any = styled('div')({
+const BalanceDetails: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -526,57 +532,57 @@ const BalanceDetails: any = styled('div')({
   margin: `0px`,
 });
 
-const Details6: any = styled('div')(({ theme }: any) => ({
+const Details6: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H4'].fontStyle,
-  fontFamily: theme.typography['Typography']['H4'].fontFamily,
-  fontWeight: theme.typography['Typography']['H4'].fontWeight,
-  fontSize: theme.typography['Typography']['H4'].fontSize,
-  letterSpacing: theme.typography['Typography']['H4'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H4'].lineHeight,
-  textDecoration: theme.typography['Typography']['H4'].textDecoration,
-  textTransform: theme.typography['Typography']['H4'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H4"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H4"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H4"].fontWeight,
+  fontSize: theme.typography["Typography"]["H4"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H4"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H4"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H4"].textDecoration,
+  textTransform: theme.typography["Typography"]["H4"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Details7: any = styled('div')(({ theme }: any) => ({
+const Details7: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `4px 0px 0px 0px`,
 }));
 
 const Link1: any = styled(MUILink, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `4px 0px 0px 0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Typography']['Body 2 Link'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2 Link'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2 Link'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2 Link'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2 Link'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2 Link'].lineHeight,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Typography"]["Body 2 Link"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2 Link"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2 Link"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2 Link"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2 Link"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2 Link"].lineHeight,
   textDecoration: `'initial'`,
-  textTransform: theme.typography['Typography']['Body 2 Link'].textTransform,
+  textTransform: theme.typography["Typography"]["Body 2 Link"].textTransform,
 }));
 
-const Text2: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Text2: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -587,15 +593,15 @@ const Text2: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `-2px 0px 0px 0px`
       : `0px 0px 0px 28px`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const Card2: any = styled('div')({
+const Card2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -608,7 +614,7 @@ const Card2: any = styled('div')({
   margin: `0px`,
 });
 
-const Balance1: any = styled('div')({
+const Balance1: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -622,8 +628,8 @@ const Balance1: any = styled('div')({
   margin: `19px 0px 0px 0px`,
 });
 
-const BalanceDetails1: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const BalanceDetails1: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -634,47 +640,47 @@ const BalanceDetails1: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: data.currentVariant === 'ScreenMobile' ? 'unset' : `242px`,
+  width: data.currentVariant === "ScreenMobile" ? "unset" : `242px`,
   margin: `0px`,
-  flex: data.currentVariant === 'ScreenMobile' ? `1` : 'unset',
+  flex: data.currentVariant === "ScreenMobile" ? `1` : "unset",
 }));
 
-const Details8: any = styled('div')(({ theme }: any) => ({
+const Details8: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Details9: any = styled('div')(({ theme }: any) => ({
+const Details9: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `4px 0px 0px 0px`,
 }));
 
-const Text3: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Text3: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -685,15 +691,15 @@ const Text3: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  flex: data.currentVariant === 'ScreenMobile' ? 'unset' : `1`,
+  flex: data.currentVariant === "ScreenMobile" ? "unset" : `1`,
   margin:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `-2px 0px 0px 0px`
       : `0px 0px 0px 28px`,
-  alignSelf: data.currentVariant === 'ScreenMobile' ? `stretch` : 'unset',
+  alignSelf: data.currentVariant === "ScreenMobile" ? `stretch` : "unset",
 }));
 
-const Card3: any = styled('div')({
+const Card3: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -706,7 +712,7 @@ const Card3: any = styled('div')({
   margin: `0px`,
 });
 
-const Balance2: any = styled('div')({
+const Balance2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -720,8 +726,8 @@ const Balance2: any = styled('div')({
   margin: `19px 0px 0px 0px`,
 });
 
-const BalanceDetails2: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const BalanceDetails2: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -732,46 +738,46 @@ const BalanceDetails2: any = styled('div', {
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: data.currentVariant === 'ScreenMobile' ? 'unset' : `242px`,
+  width: data.currentVariant === "ScreenMobile" ? "unset" : `242px`,
   margin: `0px`,
-  flex: data.currentVariant === 'ScreenMobile' ? `1` : 'unset',
+  flex: data.currentVariant === "ScreenMobile" ? `1` : "unset",
 }));
 
-const Details10: any = styled('div')(({ theme }: any) => ({
+const Details10: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Details11: any = styled('div')(({ theme }: any) => ({
+const Details11: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `4px 0px 0px 0px`,
 }));
 
-const Frame41: any = styled('div')({
+const Frame41: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -785,25 +791,25 @@ const Frame41: any = styled('div')({
 });
 
 const ButtonOutlined: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const Cards2X2: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Cards2X2: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -813,7 +819,7 @@ const Cards2X2: any = styled('div', {
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding:
-    data.currentVariant === 'ScreenMobile'
+    data.currentVariant === "ScreenMobile"
       ? `10px 70px`
       : `10px 70px 100px 70px`,
   boxSizing: `border-box`,
@@ -822,7 +828,7 @@ const Cards2X2: any = styled('div', {
   overflow: `hidden`,
 }));
 
-const CardRow1: any = styled('div')({
+const CardRow1: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -836,8 +842,8 @@ const CardRow1: any = styled('div')({
   margin: `0px`,
 });
 
-const CardChoreo2: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo2: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -853,7 +859,7 @@ const CardChoreo2: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content2: any = styled('div')({
+const Content2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -868,7 +874,7 @@ const Content2: any = styled('div')({
   margin: `0px`,
 });
 
-const Details12: any = styled('div')({
+const Details12: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -883,7 +889,7 @@ const Details12: any = styled('div')({
   margin: `0px`,
 });
 
-const Top2: any = styled('div')({
+const Top2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -897,7 +903,7 @@ const Top2: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon1: any = styled('div')({
+const Icon1: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -913,7 +919,7 @@ const Icon1: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector1: any = styled('img')({
+const Vector1: any = styled("img")({
   height: `37.5px`,
   width: `33.33px`,
   position: `absolute`,
@@ -921,7 +927,7 @@ const Vector1: any = styled('img')({
   top: `6px`,
 });
 
-const Text4: any = styled('div')({
+const Text4: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -935,7 +941,7 @@ const Text4: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop1: any = styled('div')({
+const TitleTop1: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -949,24 +955,24 @@ const TitleTop1: any = styled('div')({
   margin: `0px`,
 });
 
-const Title1: any = styled('div')(({ theme }: any) => ({
+const Title1: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame5: any = styled('div')({
+const Frame5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -980,24 +986,24 @@ const Frame5: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details13: any = styled('div')(({ theme }: any) => ({
+const Details13: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame42: any = styled('div')({
+const Frame42: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1012,25 +1018,25 @@ const Frame42: any = styled('div')({
 });
 
 const ButtonText1: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const CardChoreo3: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo3: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -1046,7 +1052,7 @@ const CardChoreo3: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content3: any = styled('div')({
+const Content3: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1061,7 +1067,7 @@ const Content3: any = styled('div')({
   margin: `0px`,
 });
 
-const Details14: any = styled('div')({
+const Details14: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1076,7 +1082,7 @@ const Details14: any = styled('div')({
   margin: `0px`,
 });
 
-const Top3: any = styled('div')({
+const Top3: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1090,7 +1096,7 @@ const Top3: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon2: any = styled('div')({
+const Icon2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1106,7 +1112,7 @@ const Icon2: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector2: any = styled('img')({
+const Vector2: any = styled("img")({
   height: `40px`,
   width: `40px`,
   position: `absolute`,
@@ -1114,7 +1120,7 @@ const Vector2: any = styled('img')({
   top: `2px`,
 });
 
-const Text5: any = styled('div')({
+const Text5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1128,7 +1134,7 @@ const Text5: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop2: any = styled('div')({
+const TitleTop2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1142,24 +1148,24 @@ const TitleTop2: any = styled('div')({
   margin: `0px`,
 });
 
-const Title2: any = styled('div')(({ theme }: any) => ({
+const Title2: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame51: any = styled('div')({
+const Frame51: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1173,24 +1179,24 @@ const Frame51: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details15: any = styled('div')(({ theme }: any) => ({
+const Details15: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame43: any = styled('div')({
+const Frame43: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1205,24 +1211,24 @@ const Frame43: any = styled('div')({
 });
 
 const ButtonText2: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const CardRow2: any = styled('div')({
+const CardRow2: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1236,8 +1242,8 @@ const CardRow2: any = styled('div')({
   margin: `10px 0px 0px 0px`,
 });
 
-const CardChoreo4: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo4: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -1253,7 +1259,7 @@ const CardChoreo4: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content4: any = styled('div')({
+const Content4: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1268,7 +1274,7 @@ const Content4: any = styled('div')({
   margin: `0px`,
 });
 
-const Details16: any = styled('div')({
+const Details16: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1283,7 +1289,7 @@ const Details16: any = styled('div')({
   margin: `0px`,
 });
 
-const Top4: any = styled('div')({
+const Top4: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1297,7 +1303,7 @@ const Top4: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon3: any = styled('div')({
+const Icon3: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1313,7 +1319,7 @@ const Icon3: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector3: any = styled('img')({
+const Vector3: any = styled("img")({
   height: `32px`,
   width: `40px`,
   position: `absolute`,
@@ -1321,7 +1327,7 @@ const Vector3: any = styled('img')({
   top: `10px`,
 });
 
-const Text6: any = styled('div')({
+const Text6: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1335,7 +1341,7 @@ const Text6: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop3: any = styled('div')({
+const TitleTop3: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1349,24 +1355,24 @@ const TitleTop3: any = styled('div')({
   margin: `0px`,
 });
 
-const Title3: any = styled('div')(({ theme }: any) => ({
+const Title3: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame52: any = styled('div')({
+const Frame52: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1380,24 +1386,24 @@ const Frame52: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details17: any = styled('div')(({ theme }: any) => ({
+const Details17: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame44: any = styled('div')({
+const Frame44: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1412,25 +1418,25 @@ const Frame44: any = styled('div')({
 });
 
 const ButtonText3: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const CardChoreo5: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo5: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -1446,7 +1452,7 @@ const CardChoreo5: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content5: any = styled('div')({
+const Content5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1461,7 +1467,7 @@ const Content5: any = styled('div')({
   margin: `0px`,
 });
 
-const Details18: any = styled('div')({
+const Details18: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1476,7 +1482,7 @@ const Details18: any = styled('div')({
   margin: `0px`,
 });
 
-const Top5: any = styled('div')({
+const Top5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1490,7 +1496,7 @@ const Top5: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon4: any = styled('div')({
+const Icon4: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1506,7 +1512,7 @@ const Icon4: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector4: any = styled('img')({
+const Vector4: any = styled("img")({
   height: `40px`,
   width: `40px`,
   position: `absolute`,
@@ -1514,7 +1520,7 @@ const Vector4: any = styled('img')({
   top: `4px`,
 });
 
-const Text7: any = styled('div')({
+const Text7: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1528,7 +1534,7 @@ const Text7: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop4: any = styled('div')({
+const TitleTop4: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1542,24 +1548,24 @@ const TitleTop4: any = styled('div')({
   margin: `0px`,
 });
 
-const Title4: any = styled('div')(({ theme }: any) => ({
+const Title4: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame53: any = styled('div')({
+const Frame53: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1573,24 +1579,24 @@ const Frame53: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details19: any = styled('div')(({ theme }: any) => ({
+const Details19: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame45: any = styled('div')({
+const Frame45: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1605,25 +1611,25 @@ const Frame45: any = styled('div')({
 });
 
 const ButtonText4: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const Cards1X4: any = styled('div', {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+const Cards1X4: any = styled("div", {
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ data }: any) => ({
   borderRadius: `0px`,
   display: `flex`,
@@ -1633,15 +1639,15 @@ const Cards1X4: any = styled('div', {
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding:
-    data.currentVariant === 'ScreenMobile' ? `10px 10px 100px 10px` : `10px`,
+    data.currentVariant === "ScreenMobile" ? `10px 10px 100px 10px` : `10px`,
   boxSizing: `border-box`,
   alignSelf: `stretch`,
   margin: `11px 0px 0px 0px`,
   overflow: `hidden`,
 }));
 
-const CardChoreo6: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo6: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -1657,7 +1663,7 @@ const CardChoreo6: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content6: any = styled('div')({
+const Content6: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1672,7 +1678,7 @@ const Content6: any = styled('div')({
   margin: `0px`,
 });
 
-const Details20: any = styled('div')({
+const Details20: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1687,7 +1693,7 @@ const Details20: any = styled('div')({
   margin: `0px`,
 });
 
-const Top6: any = styled('div')({
+const Top6: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1701,7 +1707,7 @@ const Top6: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon5: any = styled('div')({
+const Icon5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1717,7 +1723,7 @@ const Icon5: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector5: any = styled('img')({
+const Vector5: any = styled("img")({
   height: `37.5px`,
   width: `33.33px`,
   position: `absolute`,
@@ -1725,7 +1731,7 @@ const Vector5: any = styled('img')({
   top: `6px`,
 });
 
-const Text8: any = styled('div')({
+const Text8: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1739,7 +1745,7 @@ const Text8: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop5: any = styled('div')({
+const TitleTop5: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1753,24 +1759,24 @@ const TitleTop5: any = styled('div')({
   margin: `0px`,
 });
 
-const Title5: any = styled('div')(({ theme }: any) => ({
+const Title5: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame54: any = styled('div')({
+const Frame54: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1784,24 +1790,24 @@ const Frame54: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details21: any = styled('div')(({ theme }: any) => ({
+const Details21: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame46: any = styled('div')({
+const Frame46: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1816,25 +1822,25 @@ const Frame46: any = styled('div')({
 });
 
 const ButtonText5: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const CardChoreo7: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo7: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -1850,7 +1856,7 @@ const CardChoreo7: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content7: any = styled('div')({
+const Content7: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1865,7 +1871,7 @@ const Content7: any = styled('div')({
   margin: `0px`,
 });
 
-const Details22: any = styled('div')({
+const Details22: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1880,7 +1886,7 @@ const Details22: any = styled('div')({
   margin: `0px`,
 });
 
-const Top7: any = styled('div')({
+const Top7: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1894,7 +1900,7 @@ const Top7: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon6: any = styled('div')({
+const Icon6: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1910,7 +1916,7 @@ const Icon6: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector6: any = styled('img')({
+const Vector6: any = styled("img")({
   height: `40px`,
   width: `40px`,
   position: `absolute`,
@@ -1918,7 +1924,7 @@ const Vector6: any = styled('img')({
   top: `2px`,
 });
 
-const Text9: any = styled('div')({
+const Text9: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1932,7 +1938,7 @@ const Text9: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop6: any = styled('div')({
+const TitleTop6: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1946,24 +1952,24 @@ const TitleTop6: any = styled('div')({
   margin: `0px`,
 });
 
-const Title6: any = styled('div')(({ theme }: any) => ({
+const Title6: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame55: any = styled('div')({
+const Frame55: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -1977,24 +1983,24 @@ const Frame55: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details23: any = styled('div')(({ theme }: any) => ({
+const Details23: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame47: any = styled('div')({
+const Frame47: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2009,25 +2015,25 @@ const Frame47: any = styled('div')({
 });
 
 const ButtonText6: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const CardChoreo8: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo8: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -2043,7 +2049,7 @@ const CardChoreo8: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content8: any = styled('div')({
+const Content8: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2058,7 +2064,7 @@ const Content8: any = styled('div')({
   margin: `0px`,
 });
 
-const Details24: any = styled('div')({
+const Details24: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2073,7 +2079,7 @@ const Details24: any = styled('div')({
   margin: `0px`,
 });
 
-const Top8: any = styled('div')({
+const Top8: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2087,7 +2093,7 @@ const Top8: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon7: any = styled('div')({
+const Icon7: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2103,7 +2109,7 @@ const Icon7: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector7: any = styled('img')({
+const Vector7: any = styled("img")({
   height: `32px`,
   width: `40px`,
   position: `absolute`,
@@ -2111,7 +2117,7 @@ const Vector7: any = styled('img')({
   top: `10px`,
 });
 
-const Text10: any = styled('div')({
+const Text10: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2125,7 +2131,7 @@ const Text10: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop7: any = styled('div')({
+const TitleTop7: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2139,24 +2145,24 @@ const TitleTop7: any = styled('div')({
   margin: `0px`,
 });
 
-const Title7: any = styled('div')(({ theme }: any) => ({
+const Title7: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame56: any = styled('div')({
+const Frame56: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2170,24 +2176,24 @@ const Frame56: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details25: any = styled('div')(({ theme }: any) => ({
+const Details25: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame48: any = styled('div')({
+const Frame48: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2202,25 +2208,25 @@ const Frame48: any = styled('div')({
 });
 
 const ButtonText7: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
-const CardChoreo9: any = styled('div')(({ theme }: any) => ({
-  backgroundColor: theme.palette['Background']['Background'],
+const CardChoreo9: any = styled("div")(({ theme }: any) => ({
+  backgroundColor: theme.palette["Background"]["Background"],
   border: `1px solid rgba(176, 176, 176, 1)`,
   boxSizing: `border-box`,
   borderRadius: `12px`,
@@ -2236,7 +2242,7 @@ const CardChoreo9: any = styled('div')(({ theme }: any) => ({
   overflow: `hidden`,
 }));
 
-const Content9: any = styled('div')({
+const Content9: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2251,7 +2257,7 @@ const Content9: any = styled('div')({
   margin: `0px`,
 });
 
-const Details26: any = styled('div')({
+const Details26: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2266,7 +2272,7 @@ const Details26: any = styled('div')({
   margin: `0px`,
 });
 
-const Top9: any = styled('div')({
+const Top9: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2280,7 +2286,7 @@ const Top9: any = styled('div')({
   margin: `0px`,
 });
 
-const Icon8: any = styled('div')({
+const Icon8: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2296,7 +2302,7 @@ const Icon8: any = styled('div')({
   overflow: `hidden`,
 });
 
-const Vector8: any = styled('img')({
+const Vector8: any = styled("img")({
   height: `40px`,
   width: `40px`,
   position: `absolute`,
@@ -2304,7 +2310,7 @@ const Vector8: any = styled('img')({
   top: `4px`,
 });
 
-const Text11: any = styled('div')({
+const Text11: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2318,7 +2324,7 @@ const Text11: any = styled('div')({
   margin: `28px 0px 0px 0px`,
 });
 
-const TitleTop8: any = styled('div')({
+const TitleTop8: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2332,24 +2338,24 @@ const TitleTop8: any = styled('div')({
   margin: `0px`,
 });
 
-const Title8: any = styled('div')(({ theme }: any) => ({
+const Title8: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['H5'].fontStyle,
-  fontFamily: theme.typography['Typography']['H5'].fontFamily,
-  fontWeight: theme.typography['Typography']['H5'].fontWeight,
-  fontSize: theme.typography['Typography']['H5'].fontSize,
-  letterSpacing: theme.typography['Typography']['H5'].letterSpacing,
-  lineHeight: theme.typography['Typography']['H5'].lineHeight,
-  textDecoration: theme.typography['Typography']['H5'].textDecoration,
-  textTransform: theme.typography['Typography']['H5'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["H5"].fontStyle,
+  fontFamily: theme.typography["Typography"]["H5"].fontFamily,
+  fontWeight: theme.typography["Typography"]["H5"].fontWeight,
+  fontSize: theme.typography["Typography"]["H5"].fontSize,
+  letterSpacing: theme.typography["Typography"]["H5"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["H5"].lineHeight,
+  textDecoration: theme.typography["Typography"]["H5"].textDecoration,
+  textTransform: theme.typography["Typography"]["H5"].textTransform,
   flex: `1`,
   margin: `0px`,
 }));
 
-const Frame57: any = styled('div')({
+const Frame57: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2363,24 +2369,24 @@ const Frame57: any = styled('div')({
   margin: `12px 0px 0px 0px`,
 });
 
-const Details27: any = styled('div')(({ theme }: any) => ({
+const Details27: any = styled("div")(({ theme }: any) => ({
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
-  color: theme.palette['Text']['Primary'],
-  fontStyle: theme.typography['Typography']['Body 2'].fontStyle,
-  fontFamily: theme.typography['Typography']['Body 2'].fontFamily,
-  fontWeight: theme.typography['Typography']['Body 2'].fontWeight,
-  fontSize: theme.typography['Typography']['Body 2'].fontSize,
-  letterSpacing: theme.typography['Typography']['Body 2'].letterSpacing,
-  lineHeight: theme.typography['Typography']['Body 2'].lineHeight,
-  textDecoration: theme.typography['Typography']['Body 2'].textDecoration,
-  textTransform: theme.typography['Typography']['Body 2'].textTransform,
+  color: theme.palette["Text"]["Primary"],
+  fontStyle: theme.typography["Typography"]["Body 2"].fontStyle,
+  fontFamily: theme.typography["Typography"]["Body 2"].fontFamily,
+  fontWeight: theme.typography["Typography"]["Body 2"].fontWeight,
+  fontSize: theme.typography["Typography"]["Body 2"].fontSize,
+  letterSpacing: theme.typography["Typography"]["Body 2"].letterSpacing,
+  lineHeight: theme.typography["Typography"]["Body 2"].lineHeight,
+  textDecoration: theme.typography["Typography"]["Body 2"].textDecoration,
+  textTransform: theme.typography["Typography"]["Body 2"].textTransform,
   alignSelf: `stretch`,
   margin: `0px`,
 }));
 
-const Frame49: any = styled('div')({
+const Frame49: any = styled("div")({
   borderRadius: `0px`,
   display: `flex`,
   position: `relative`,
@@ -2395,21 +2401,21 @@ const Frame49: any = styled('div')({
 });
 
 const ButtonText8: any = styled(Button, {
-  shouldForwardProp: (prop: any) => !['data'].includes(prop.toString()),
+  shouldForwardProp: (prop: any) => !["data"].includes(prop.toString()),
 })(({ theme, data }: any) => ({
   margin: `0px`,
-  color: theme.palette['Primary']['Main'],
-  fontStyle: theme.typography['Components']['Button Font - Large'].fontStyle,
-  fontFamily: theme.typography['Components']['Button Font - Large'].fontFamily,
-  fontWeight: theme.typography['Components']['Button Font - Large'].fontWeight,
-  fontSize: theme.typography['Components']['Button Font - Large'].fontSize,
+  color: theme.palette["Primary"]["Main"],
+  fontStyle: theme.typography["Components"]["Button Font - Large"].fontStyle,
+  fontFamily: theme.typography["Components"]["Button Font - Large"].fontFamily,
+  fontWeight: theme.typography["Components"]["Button Font - Large"].fontWeight,
+  fontSize: theme.typography["Components"]["Button Font - Large"].fontSize,
   letterSpacing:
-    theme.typography['Components']['Button Font - Large'].letterSpacing,
-  lineHeight: theme.typography['Components']['Button Font - Large'].lineHeight,
+    theme.typography["Components"]["Button Font - Large"].letterSpacing,
+  lineHeight: theme.typography["Components"]["Button Font - Large"].lineHeight,
   textDecoration:
-    theme.typography['Components']['Button Font - Large'].textDecoration,
+    theme.typography["Components"]["Button Font - Large"].textDecoration,
   textTransform:
-    theme.typography['Components']['Button Font - Large'].textTransform,
+    theme.typography["Components"]["Button Font - Large"].textTransform,
 }));
 
 const Footer11: any = styled(Footer1)(({ theme }: any) => ({
@@ -2418,114 +2424,147 @@ const Footer11: any = styled(Footer1)(({ theme }: any) => ({
 }));
 
 function Q2Portal(props: Q2PortalProps): JSX.Element {
-  const { data } = useQ2Portal();
+  const { data, fns } = useQ2Portal();
+
+  if (data.isAuthLoading || !data.signedIn) {
+    return (
+      <Box
+        display="flex"
+        height="100vh"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <ScreenDesktop className={props.className}>
       <BannerTop1 />
       <Banner data={data}>
-        <CardChoreo>
-          <Content data={data}>
-            <Card1 src={Card1Image} loading="lazy" alt={'Card 1'} />
-            <Details data={data}>
-              <Top data={data}>
-                <Text>
-                  <TitleTop>
-                    <Title>{`Horizon Loyalty Rewards`}</Title>
-                  </TitleTop>
-                  <Points>
-                    <AvailablePoints>
-                      <Details1>{`3760`}</Details1>
-                      <Details2>{`Available Points`}</Details2>
-                    </AvailablePoints>
-                  </Points>
-                </Text>
-              </Top>
-              <Frame4 data={data}>
-                <ButtonText
-                  variant="text"
-                  size={'large'}
-                  color={'primary'}
-                  disabled={false}
-                  data={data}
-                >
-                  {'REDEEM POINTS'}
-                </ButtonText>
-              </Frame4>
-            </Details>
-          </Content>
-        </CardChoreo>
+        {data.isCardDetailsLoading ? (
+          <Skeleton
+            variant="rounded"
+            sx={{ width: "1588px", height: "172px" }}
+          />
+        ) : (
+          <CardChoreo>
+            <Content data={data}>
+              <Card1 src={Card1Image} loading="lazy" alt={"Card 1"} />
+              <Details data={data}>
+                <Top data={data}>
+                  <Text>
+                    <TitleTop>
+                      <Title>{`Horizon Loyalty Rewards`}</Title>
+                    </TitleTop>
+                    <Points>
+                      <AvailablePoints>
+                        <Details1>{data.cardDetails?.rewardPoints}</Details1>
+                        <Details2>{`Available Points`}</Details2>
+                      </AvailablePoints>
+                    </Points>
+                  </Text>
+                </Top>
+                <Frame4 data={data}>
+                  <ButtonText
+                    variant="text"
+                    size={"large"}
+                    color={"primary"}
+                    disabled={false}
+                    onClick={() => {
+                      fns.onRedeemPoints();
+                    }}
+                    data={data}
+                  >
+                    {"REDEEM POINTS"}
+                  </ButtonText>
+                </Frame4>
+              </Details>
+            </Content>
+          </CardChoreo>
+        )}
       </Banner>
       <Banner1 data={data}>
-        <CardChoreo1>
-          <Content1>
-            <Details3>
-              <BalanaceBanner data={data}>
-                <Vector src={VectorImage} loading="lazy" alt={'Vector'} />
-                <Txt data={data}>
-                  <Details4 data={data}>
-                    {`You do not have a payment due right now.`}
-                  </Details4>
-                  <Details5 data={data}>
-                    {`Your next statement period ends Nov 19, 2023`}
-                  </Details5>
-                </Txt>
-              </BalanaceBanner>
-              <Top1 data={data}>
-                <Text1 data={data}>
-                  <Card>
-                    <CardNumber>{`CREDIT CARD (...1289)`}</CardNumber>
-                  </Card>
-                  <Balance>
-                    <BalanceDetails>
-                      <Details6>{`$1250.39`}</Details6>
-                      <Details7>{`Current Balance`}</Details7>
-                      <Link1
-                        color={'primary'}
-                        disabled={false}
-                        underline={'always'}
-                        data={data}
-                      >
-                        {'Balance Details'}
-                      </Link1>
-                    </BalanceDetails>
-                  </Balance>
-                </Text1>
-                <Text2 data={data}>
-                  <Card2></Card2>
-                  <Balance1>
-                    <BalanceDetails1 data={data}>
-                      <Details8>{`$1692.88`}</Details8>
-                      <Details9>{`Last statement balance`}</Details9>
-                    </BalanceDetails1>
-                  </Balance1>
-                </Text2>
-                <Text3 data={data}>
-                  <Card3></Card3>
-                  <Balance2>
-                    <BalanceDetails2 data={data}>
-                      <Details10>{`$14,500.00`}</Details10>
-                      <Details11>{`Available credit`}</Details11>
-                    </BalanceDetails2>
-                  </Balance2>
-                </Text3>
-              </Top1>
-              <Frame41>
-                <ButtonOutlined
-                  variant="outlined"
-                  size={'large'}
-                  color={'primary'}
-                  disabled={false}
-                  data={data}
-                >
-                  {'PAY CARD'}
-                </ButtonOutlined>
-              </Frame41>
-            </Details3>
-          </Content1>
-        </CardChoreo1>
+        {data.isCardDetailsLoading ? (
+          <Skeleton
+            variant="rounded"
+            sx={{ width: "1588px", height: "364px" }}
+          />
+        ) : (
+          <CardChoreo1>
+            <Content1>
+              <Details3>
+                <BalanaceBanner data={data}>
+                  <Vector src={VectorImage} loading="lazy" alt={"Vector"} />
+                  <Txt data={data}>
+                    <Details4 data={data}>
+                      {`You do not have a payment due right now.`}
+                    </Details4>
+                    <Details5 data={data}>
+                      {`Your next statement period ends Nov 19, 2023`}
+                    </Details5>
+                  </Txt>
+                </BalanaceBanner>
+                <Top1 data={data}>
+                  <Text1 data={data}>
+                    <Card>
+                      <CardNumber>{`CREDIT CARD (...${data.cardDetails?.cardNumber
+                        .toString()
+                        .slice(-4)})`}</CardNumber>
+                    </Card>
+                    <Balance>
+                      <BalanceDetails>
+                        <Details6>{`$${data.cardDetails?.currentBalance}`}</Details6>
+                        <Details7>{`Current Balance`}</Details7>
+                        <Link1
+                          color={"primary"}
+                          disabled={false}
+                          underline={"always"}
+                          data={data}
+                        >
+                          {"Balance Details"}
+                        </Link1>
+                      </BalanceDetails>
+                    </Balance>
+                  </Text1>
+                  <Text2 data={data}>
+                    <Card2></Card2>
+                    <Balance1>
+                      <BalanceDetails1 data={data}>
+                        <Details8>{`$${data.cardDetails?.lastStatementBalance}`}</Details8>
+                        <Details9>{`Last statement balance`}</Details9>
+                      </BalanceDetails1>
+                    </Balance1>
+                  </Text2>
+                  <Text3 data={data}>
+                    <Card3></Card3>
+                    <Balance2>
+                      <BalanceDetails2 data={data}>
+                        <Details10>{`$${data.cardDetails?.availableCredit}`}</Details10>
+                        <Details11>{`Available credit`}</Details11>
+                      </BalanceDetails2>
+                    </Balance2>
+                  </Text3>
+                </Top1>
+                <Frame41>
+                  <ButtonOutlined
+                    variant="outlined"
+                    size={"large"}
+                    color={"primary"}
+                    disabled={false}
+                    data={data}
+                  >
+                    {"PAY CARD"}
+                  </ButtonOutlined>
+                </Frame41>
+              </Details3>
+            </Content1>
+          </CardChoreo1>
+        )}
       </Banner1>
-      {!(data.currentVariant === 'ScreenMobile') && (
+
+      {!(data.currentVariant === "ScreenMobile") && (
         <Cards2X2 data={data}>
           <CardRow1>
             <CardChoreo2>
@@ -2536,7 +2575,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                       <Vector1
                         src={Vector1Image}
                         loading="lazy"
-                        alt={'Vector'}
+                        alt={"Vector"}
                       />
                     </Icon1>
                     <Text4>
@@ -2553,12 +2592,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                   <Frame42>
                     <ButtonText1
                       variant="text"
-                      size={'large'}
-                      color={'primary'}
+                      size={"large"}
+                      color={"primary"}
                       disabled={false}
                       data={data}
                     >
-                      {'LEARN MORE'}
+                      {"LEARN MORE"}
                     </ButtonText1>
                   </Frame42>
                 </Details12>
@@ -2572,7 +2611,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                       <Vector2
                         src={Vector2Image}
                         loading="lazy"
-                        alt={'Vector'}
+                        alt={"Vector"}
                       />
                     </Icon2>
                     <Text5>
@@ -2591,12 +2630,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                   <Frame43>
                     <ButtonText2
                       variant="text"
-                      size={'large'}
-                      color={'primary'}
+                      size={"large"}
+                      color={"primary"}
                       disabled={false}
                       data={data}
                     >
-                      {'LEARN MORE'}
+                      {"LEARN MORE"}
                     </ButtonText2>
                   </Frame43>
                 </Details14>
@@ -2612,7 +2651,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                       <Vector3
                         src={Vector3Image}
                         loading="lazy"
-                        alt={'Vector'}
+                        alt={"Vector"}
                       />
                     </Icon3>
                     <Text6>
@@ -2629,12 +2668,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                   <Frame44>
                     <ButtonText3
                       variant="text"
-                      size={'large'}
-                      color={'primary'}
+                      size={"large"}
+                      color={"primary"}
                       disabled={false}
                       data={data}
                     >
-                      {'LEARN MORE'}
+                      {"LEARN MORE"}
                     </ButtonText3>
                   </Frame44>
                 </Details16>
@@ -2648,7 +2687,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                       <Vector4
                         src={Vector4Image}
                         loading="lazy"
-                        alt={'Vector'}
+                        alt={"Vector"}
                       />
                     </Icon4>
                     <Text7>
@@ -2665,12 +2704,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                   <Frame45>
                     <ButtonText4
                       variant="text"
-                      size={'large'}
-                      color={'primary'}
+                      size={"large"}
+                      color={"primary"}
                       disabled={false}
                       data={data}
                     >
-                      {'Check rates'}
+                      {"Check rates"}
                     </ButtonText4>
                   </Frame45>
                 </Details18>
@@ -2679,14 +2718,14 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
           </CardRow2>
         </Cards2X2>
       )}
-      {data.currentVariant === 'ScreenMobile' && (
+      {data.currentVariant === "ScreenMobile" && (
         <Cards1X4 data={data}>
           <CardChoreo6>
             <Content6>
               <Details20>
                 <Top6>
                   <Icon5>
-                    <Vector5 src={Vector5Image} loading="lazy" alt={'Vector'} />
+                    <Vector5 src={Vector5Image} loading="lazy" alt={"Vector"} />
                   </Icon5>
                   <Text8>
                     <TitleTop5>
@@ -2702,12 +2741,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                 <Frame46>
                   <ButtonText5
                     variant="text"
-                    size={'large'}
-                    color={'primary'}
+                    size={"large"}
+                    color={"primary"}
                     disabled={false}
                     data={data}
                   >
-                    {'LEARN MORE'}
+                    {"LEARN MORE"}
                   </ButtonText5>
                 </Frame46>
               </Details20>
@@ -2718,7 +2757,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
               <Details22>
                 <Top7>
                   <Icon6>
-                    <Vector6 src={Vector6Image} loading="lazy" alt={'Vector'} />
+                    <Vector6 src={Vector6Image} loading="lazy" alt={"Vector"} />
                   </Icon6>
                   <Text9>
                     <TitleTop6>
@@ -2734,12 +2773,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                 <Frame47>
                   <ButtonText6
                     variant="text"
-                    size={'large'}
-                    color={'primary'}
+                    size={"large"}
+                    color={"primary"}
                     disabled={false}
                     data={data}
                   >
-                    {'LEARN MORE'}
+                    {"LEARN MORE"}
                   </ButtonText6>
                 </Frame47>
               </Details22>
@@ -2750,7 +2789,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
               <Details24>
                 <Top8>
                   <Icon7>
-                    <Vector7 src={Vector7Image} loading="lazy" alt={'Vector'} />
+                    <Vector7 src={Vector7Image} loading="lazy" alt={"Vector"} />
                   </Icon7>
                   <Text10>
                     <TitleTop7>
@@ -2766,12 +2805,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                 <Frame48>
                   <ButtonText7
                     variant="text"
-                    size={'large'}
-                    color={'primary'}
+                    size={"large"}
+                    color={"primary"}
                     disabled={false}
                     data={data}
                   >
-                    {'LEARN MORE'}
+                    {"LEARN MORE"}
                   </ButtonText7>
                 </Frame48>
               </Details24>
@@ -2782,7 +2821,7 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
               <Details26>
                 <Top9>
                   <Icon8>
-                    <Vector8 src={Vector8Image} loading="lazy" alt={'Vector'} />
+                    <Vector8 src={Vector8Image} loading="lazy" alt={"Vector"} />
                   </Icon8>
                   <Text11>
                     <TitleTop8>
@@ -2798,12 +2837,12 @@ function Q2Portal(props: Q2PortalProps): JSX.Element {
                 <Frame49>
                   <ButtonText8
                     variant="text"
-                    size={'large'}
-                    color={'primary'}
+                    size={"large"}
+                    color={"primary"}
                     disabled={false}
                     data={data}
                   >
-                    {'Check rates'}
+                    {"Check rates"}
                   </ButtonText8>
                 </Frame49>
               </Details26>

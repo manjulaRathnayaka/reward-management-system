@@ -19,6 +19,7 @@ import SearchIconImage from 'src/assets/images/BannerTop_search_icon.png';
 import { styled } from '@mui/material/styles';
 import { BannerTopProps } from 'src/types';
 import useBannerTop from 'src/components/BannerTop/useBannerTop';
+import { Button, Typography } from '@mui/material';
 
 const Property1Desktop: any = styled('div')({
   backgroundColor: `rgba(255, 255, 255, 1)`,
@@ -94,6 +95,8 @@ const SignOut: any = styled('div', {
   textAlign: `left`,
   whiteSpace: `pre-wrap`,
   fontSynthesis: `none`,
+  display: `flex`,
+  alignItems: `center`,
   color: theme.palette['Primary']['Contrast'],
   fontStyle: `normal`,
   fontFamily: `Inter`,
@@ -453,7 +456,8 @@ const Underline5: any = styled('div')({
 });
 
 function BannerTop(props: BannerTopProps): JSX.Element {
-  const { data } = useBannerTop();
+  const { data, fns } = useBannerTop();
+  const { state } = data;
 
   return (
     <Property1Desktop className={props.className}>
@@ -463,7 +467,12 @@ function BannerTop(props: BannerTopProps): JSX.Element {
         </HorizonLogo>
         <LinksTop>
           {!(data.currentVariant === 'Property1Mobile') && (
-            <SignOut data={data}>{`Sign Out`}</SignOut>
+            <SignOut data={data}>
+              <Typography style={{ marginRight: '10px'}}>{state.displayName || state.email}</Typography>
+              <Button variant="text" color="inherit" onClick={fns.handleSignOut}>
+                Sign Out
+              </Button>
+            </SignOut>
           )}
           {!(data.currentVariant === 'Property1Mobile') && (
             <SearchIcon
@@ -503,7 +512,7 @@ function BannerTop(props: BannerTopProps): JSX.Element {
               {false && <Underline4></Underline4>}
             </Link5>
             <Link6>
-              <InternalLink to="/Q3Rewards">
+              <InternalLink to="/rewards">
                 <Rewards>{`Rewards`}</Rewards>
               </InternalLink>
               {false && <Underline5></Underline5>}

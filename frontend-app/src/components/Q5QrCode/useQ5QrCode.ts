@@ -11,20 +11,109 @@
  *
  **********************************************************************/
 
-import React from 'react';
-import useQ5QrCodeResponsiveSize from './useQ5QrCodeResponsiveSize';
+import React, { useEffect } from "react";
+import useQ5QrCodeResponsiveSize from "./useQ5QrCodeResponsiveSize";
+import { useAuthContext } from "@asgardeo/auth-react";
+import { useParams, useNavigate } from "react-router-dom";
+import { CardDetails, Reward } from "src/api/types";
+import { generateQR, getCardDetails, getRewardDetails } from "src/api/api";
 
 /* These are the possible values for the current variant. Use this to change the currentVariant dynamically.
 Please don't modify */
 const variantOptions = {
-  ScreenDesktop: 'ScreenDesktop',
-  ScreenMobile: 'ScreenMobile',
+  ScreenDesktop: "ScreenDesktop",
+  ScreenMobile: "ScreenMobile",
 };
 
 const useQ5QrCode = () => {
   const [currentVariant, setCurrentVariant] = React.useState<string>(
-    variantOptions['ScreenDesktop']
+    variantOptions["ScreenDesktop"]
   );
+  const navigate = useNavigate();
+  const { rewardId } = useParams();
+  const [qrCode, setQrCode] = React.useState<any>();
+  const [isRewardLoading, setIsRewardLoading] = React.useState(false);
+  const [isQRLoading, setIsQRLoading] = React.useState(true);
+  const [reward, setReward] = React.useState<Reward | null>(null);
+  const [cardDetails, setCardDetails] = React.useState<CardDetails | null>(
+    null
+  );
+  const { state } = useAuthContext();
+
+  const getRewardImage = (rewardName: string) => {
+    switch (rewardName) {
+      case "Target":
+        return "/images/target.png";
+      case "Starbucks Coffee":
+        return "/images/starbucks.png";
+      case "Jumba Juice":
+        return "/images/jamba.png";
+      case "Grubhub":
+        return "/images/grubhub.png";
+      default:
+        return "";
+    }
+  };
+
+  async function getRewardInfo() {
+    if (rewardId) {
+      setIsRewardLoading(true);
+      getRewardDetails(parseInt(rewardId))
+        .then((res) => {
+          const logoUrl = getRewardImage(res.data.name);
+          setReward({ ...res.data, logoUrl });
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => {
+          setIsRewardLoading(false);
+        });
+    }
+  }
+
+  async function generateQRCode(
+    cardNo: string,
+    rewardName: string,
+    totalPoints: number
+  ) {
+    setIsQRLoading(true);
+    generateQR(cardNo, rewardName, totalPoints)
+      .then((res) => {
+        const imageObjectURL = URL.createObjectURL(res.data);
+        setQrCode(imageObjectURL);
+        setIsQRLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        setIsRewardLoading(false);
+      });
+  }
+
+  async function getCardInfo(userId) {
+    getCardDetails(userId)
+      .then((res) => {
+        setCardDetails(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  useEffect(() => {
+    if (state.isAuthenticated && state.sub) {
+      getCardInfo(state.sub);
+      getRewardInfo();
+    }
+  }, [state.isAuthenticated, state.sub]);
+
+  useEffect(() => {
+    if (cardDetails && reward) {
+      generateQRCode(cardDetails.cardNumber, reward.name, reward.totalPoints);
+    }
+  }, [cardDetails, reward]);
 
   const breakpointsVariant = useQ5QrCodeResponsiveSize();
 
@@ -34,8 +123,16 @@ const useQ5QrCode = () => {
     }
   }, [breakpointsVariant]);
 
-  const data: any = { currentVariant };
-  const backToRewards = (): any => {};
+  const data: any = {
+    currentVariant,
+    reward,
+    isRewardLoading,
+    isQRLoading,
+    qrCode,
+  };
+  const backToRewards = (): any => {
+    navigate("/rewards");
+  };
 
   const fns: any = { backToRewards, setCurrentVariant };
 

@@ -11,13 +11,33 @@
  *
  **********************************************************************/
 
-import React from 'react';
+import { useMemo } from 'react';
 import { CardRewardProps } from 'src/types';
+import { useNavigate } from 'react-router-dom';
 const useCardReward = (props: CardRewardProps) => {
-  const data: any = {};
-  const rewardDetailsPage = (param1: any): any => {};
+  const navigate = useNavigate();
+  
+  const { reward } = props;
+
+  const imageUrl = useMemo(() => {
+    switch (reward.name) {
+      case 'Target':
+        return '/images/target.png';
+      case 'Starbucks Coffee':
+        return '/images/starbucks.png';
+      case 'Jumba Juice':
+        return '/images/jamba.png';
+      case 'Grubhub':
+        return '/images/grubhub.png';
+    }
+
+  }, [reward.name]);
+  const rewardDetailsPage = (rewardID: number) => {
+    navigate(`/reward-details/${rewardID}`);
+  };
 
   const fns: any = { rewardDetailsPage };
+  const data: any = { imageUrl };
 
   return { data, fns };
 };
