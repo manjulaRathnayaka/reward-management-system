@@ -32,7 +32,7 @@ const useCardReward = (props: CardRewardProps) => {
     }
 
   }, [reward.name]);
-  const rewardDetailsPage = (rewardID: number) => {
+  const rewardDetailsPage = (rewardID: string) => {
     navigate(`/reward-details/${rewardID}`);
   };
 

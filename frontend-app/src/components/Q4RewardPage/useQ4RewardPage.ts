@@ -60,7 +60,7 @@ const useQ4RewardPage = () => {
   async function getRewardInfo() {
     if (rewardId) {
       setIsRewardLoading(true);
-      getRewardDetails(parseInt(rewardId))
+      getRewardDetails(rewardId)
         .then((res) => {
           const logoUrl = getRewardImage(res.data.name);
           setReward({ ...res.data, logoUrl });

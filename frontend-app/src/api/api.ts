@@ -16,7 +16,7 @@ export const getRewards = async () => {
   return response as AxiosResponse<Reward[]>;
 };
 
-export const getRewardDetails = async (rewardId: number) => {
+export const getRewardDetails = async (rewardId: string) => {
   const url = `rewards/${rewardId}`;
   const response = await get(url);
   return response as AxiosResponse<Reward>;
