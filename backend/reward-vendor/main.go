@@ -33,7 +33,7 @@ var rewards []Reward
 var rewardConfirmationWebhookUrl = os.Getenv("REWARD_CONFIRMATION_WEBHOOK_URL")
 
 func RespondWithRewardConfirmation(rewardId string, userId string) {
-	logger.Info("responding with reward confirmation")
+	logger.Info("responding with reward confirmation", zap.String("rewardId", rewardId), zap.String("userId", userId))
 
 	// Generate the 16-digit number and encapsulate in an anonymous struct
 	rewardConfirmation := RewardConfirmation{
