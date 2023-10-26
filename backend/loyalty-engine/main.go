@@ -36,13 +36,16 @@ var rewardOffers []RewardOffer
 var users []User
 
 func getRewardOffers(w http.ResponseWriter, r *http.Request) {
+	logger.Info("get all reward offers")
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(rewardOffers)
 }
 
 func getRewardOffer(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
+	logger.Info("get reward offer by id", zap.String("offer id", params["id"]))
+	w.Header().Set("Content-Type", "application/json")
 	for _, item := range rewardOffers {
 		if item.Id == params["id"] {
 			json.NewEncoder(w).Encode(item)
@@ -59,14 +62,15 @@ func getRewardOffer(w http.ResponseWriter, r *http.Request) {
 
 
 func getUserRewards(w http.ResponseWriter, r *http.Request) {
-	logger.Info("get all rewards")
+	logger.Info("get all user rewards")
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(userRewards)
 }
 
 func getUserDetails(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
+	logger.Info("get user details by id", zap.String("user id", params["id"]))
+	w.Header().Set("Content-Type", "application/json")
 	for _, item := range users {
 		if item.UserId == params["id"] {
 			json.NewEncoder(w).Encode(item)
