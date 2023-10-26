@@ -1,10 +1,12 @@
 package org.ramith.qrcodegenerator.controllers;
 
 
+import net.glxn.qrgen.javase.QRCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,15 +14,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import net.glxn.qrgen.core.image.ImageType;
-import net.glxn.qrgen.core.scheme.*;
-import net.glxn.qrgen.javase.QRCode;
-import java.io.File;
 
 @RestController
 public class QRCodeGeneratorRestController {
+
+
+    Logger logger = LoggerFactory.getLogger(QRCodeGeneratorRestController.class);
+
 
     /**
      * Generate QR code for the given content
@@ -31,6 +31,7 @@ public class QRCodeGeneratorRestController {
     @GetMapping(value = "/qrcode", produces = MediaType.IMAGE_PNG_VALUE)
     public ResponseEntity<BufferedImage> qrcode(@RequestParam(name = "content", required = true) String content)
             throws Exception {
+        logger.info("Generating QR code for the content: {}", content);
         return ResponseEntity.ok(generateQRCodeImage(content));
     }
     public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
