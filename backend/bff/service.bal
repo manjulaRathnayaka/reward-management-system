@@ -1,4 +1,5 @@
 import ballerina/mime;
+import ballerina/log;
 import ballerina/http;
 
 # A service representing a network-accessible API
@@ -23,7 +24,7 @@ service / on new http:Listener(9090) {
     }
 
     resource function get rewards() returns RewardOffer[] | error{
-
+        log:printInfo("get all rewards aviailable");
         http:Client loyaltyAPI = check new (url = loyaltyMangementApiUrl, config = {
             auth: {
                 tokenUrl: tokenUrl,
@@ -38,6 +39,7 @@ service / on new http:Listener(9090) {
    }
 
     resource function get rewards/[string rewardId]() returns RewardOffer| error {
+        log:printInfo("get reward by id", rewardId = rewardId);
         http:Client loyaltyAPI = check new (url = loyaltyMangementApiUrl, config = {
             auth: {
                 tokenUrl: tokenUrl,
@@ -51,7 +53,7 @@ service / on new http:Listener(9090) {
     }
 
     resource function get generate\-qr(string text) returns http:Response|error {
-
+        log:printInfo("generate qr code for text", text = text);
         http:Client qrCodeGeneratorApi = check new (url = qrCodeGeneratorApiUrl, config = {
             auth: {
                 tokenUrl: tokenUrl,
